@@ -1,17 +1,19 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Manifest -->
+<!-- Manifest CORRETTO -->
 <link rel="manifest" href="https://massimocora3-create.github.io/corriferrara-app/manifest.json">
 
+<!-- Colore barra indirizzi -->
+<meta name="theme-color" content="#003d7a">
 
-<!-- Service Worker -->
+<!-- Service Worker CORRETTO -->
 <script>
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("https://massimocora3-create.github.io/corriferrara-app/sw.js");
-
 }
 </script>
 
@@ -23,9 +25,9 @@ body {
   color: #111;
 }
 
-/* Titolo */
+/* Header */
 .header {
-  background: #004c99;
+  background: #003d7a; /* blu più scuro */
   padding: 25px 15px;
   text-align: center;
   color: #fff;
@@ -43,7 +45,7 @@ body {
 
 /* Box principali */
 .box {
-  background: #0066cc;
+  background: #005bb5; /* BLU SCURO PIÙ BELLO */
   padding: 20px;
   border-radius: 12px;
   color: #fff;
@@ -55,10 +57,11 @@ body {
   align-items: center;
   gap: 12px;
   transition: 0.2s;
+  box-shadow: 0px 3px 10px rgba(0,0,0,0.15);
 }
 
 .box:hover {
-  background: #004c99;
+  background: #003d7a; /* hover più scuro */
 }
 
 /* Icone */
@@ -69,7 +72,7 @@ body {
 /* Sottobox */
 .submenu {
   display: none;
-  background: #e9f1ff;
+  background: #e2edff;
   padding: 10px 15px 15px 15px;
   margin: -10px 20px 10px 20px;
   border-radius: 8px;
@@ -87,16 +90,16 @@ body {
   margin-top: 8px;
   border-radius: 6px;
   font-size: 16px;
-  border-left: 4px solid #0066cc;
+  border-left: 4px solid #005bb5;
   cursor: pointer;
   font-weight: 500;
 }
 
 .subbox:hover {
-  background: #dfeaff;
+  background: #d7e6ff;
 }
 
-/* Etichetta piccola */
+/* Testo piccolo */
 .label-small {
   font-size: 14px;
   opacity: 0.8;
@@ -114,6 +117,7 @@ function toggleSub(id) {
   el.style.display = el.style.display === "block" ? "none" : "block";
 }
 </script>
+
 </head>
 
 <body>
@@ -124,37 +128,31 @@ function toggleSub(id) {
 
 <div class="grid">
 
-  <!-- 1 -->
   <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/storia-della-corriferrara-asd.html')">
     <div class="icon">🏛️</div>
     1. Chi siamo<br><span class="label-small">Storia, valori, missione</span>
   </div>
 
-  <!-- 2 -->
   <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/news.html')">
     <div class="icon">📰</div>
     2. News<br><span class="label-small">Tutte le novità</span>
   </div>
 
-  <!-- 3 -->
   <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/dove-si-corre.html')">
     <div class="icon">📅</div>
     3. Dove si corre<br><span class="label-small">Calendari gare</span>
   </div>
 
-  <!-- 4 -->
   <div class="box" onclick="openLink('https://goo.gl/forms/WzRBTqYzxg0jbOCH3')">
     <div class="icon">📝</div>
     4. Dove ho corso<br><span class="label-small">Inserisci le tue gare</span>
   </div>
 
-  <!-- 5 -->
   <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/classifiche.html')">
     <div class="icon">🏆</div>
     5. Classifiche<br><span class="label-small">Classifiche + Calcolo punti</span>
   </div>
 
-  <!-- 6 -->
   <div class="box" onclick="toggleSub('sub6')">
     <div class="icon">🪪</div>
     6. Tesseramento<br><span class="label-small">Rinnovo + controllo tessera</span>
@@ -165,13 +163,11 @@ function toggleSub(id) {
     <div class="subbox" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/tessere-corriferrara_26.html')">6.2 Numero e scadenza tessera</div>
   </div>
 
-  <!-- 7 -->
   <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/pre-iscrizioni-prossime-gare-e-eventi.html')">
     <div class="icon">📨</div>
     7. Pre-iscrizioni gare & eventi
   </div>
 
-  <!-- 8 -->
   <div class="box" onclick="toggleSub('sub8')">
     <div class="icon">❤️</div>
     8. Certificato medico
@@ -182,43 +178,36 @@ function toggleSub(id) {
     <div class="subbox" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/controlla-la-scadenza-del-tuo.html')">8.2 Controlla scadenza</div>
   </div>
 
-  <!-- 9 -->
   <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/allenamenti-collettivi.html')">
     <div class="icon">🏃‍♂️</div>
     9. Allenamenti collettivi
   </div>
 
-  <!-- 10 -->
   <div class="box" onclick="openLink('https://www.runnerschoolitalia.com/')">
     <div class="icon">🎓</div>
     10. Runner's School Italia
   </div>
 
-  <!-- 11 -->
   <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/trail-running.html')">
     <div class="icon">⛰️</div>
     11. Trail Running
   </div>
 
-  <!-- 12 -->
   <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/fc-bike-team.html')">
     <div class="icon">🚴‍♂️</div>
     12. Bike Team
   </div>
 
-  <!-- 13 -->
   <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/abbigliamento-corriferrara_18.html')">
     <div class="icon">👕</div>
     13. Abbigliamento ufficiale
   </div>
 
-  <!-- 14 -->
   <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/contatti.html')">
     <div class="icon">☎️</div>
     14. Contatti
   </div>
 
-  <!-- 15 -->
   <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/sponsor.html')">
     <div class="icon">🤝</div>
     15. Sponsor & Convenzioni
