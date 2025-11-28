@@ -1,0 +1,25 @@
+{
+  "name": "Corriferrara App",
+  "short_name": "Corriferrara",
+  "start_url": "/p/app-corriferrara.html",
+  "display": "standalone",
+  "background_color": "#004c99",
+  "theme_color": "#004c99",
+  "icons": [
+    {
+      "src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgl3mh_CuaeW13Swnq7kUrt4LUHUD7JCo3-Zyth8eDnBL6zY9KH9fMPGmOpLOfkplrl4TvFz0yhYsooj0MI2E_7AGZ7RxHpWA1KL84e6bcRZW3Q_Mn-v16jbk4sZ84xahN14Qdx84p8o0Sgj0TOQ7fHPjd7JIM5zRiPuRv6my4xW8CU3TZlLHrroEDxoIOx/s1600/corriferrara_180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjUVeIh_KS_loIybASCnj9pk-kW2socRQkBjx_kl-9ZVFceC52f7U4_ImGhhJ2mb7NU8dnMHaVCEQYcsaBnhMOhulsXvERl3I6CjIbnqwD74UDaWaAQzoY1BBkgF_ogfpDsN6cZyi3rjXig1IyXe9Uwbnk-LrHXu4ztnx7vNcpEfQC7Iezq6xmq96r4i8pL/s1600/corriferrara_192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgPPI2PuurNQeIq-get4rfXh89yFKSKAi2zpjIVJjEYcUhMPhwFHBNEKFwnjTt95LxsyK1J_P2CZiyrjwSvu9RFa_BGjv8UPxttGjBKfKLJQsCRMGG1ysApVmJctbIEA0nB5A_QMLaHUzyNDlYaAH_bpazGQJdCCUUPslwNOfHTmaZ_heP0UBLUVhukpkyL/s1600/corriferrara_512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
