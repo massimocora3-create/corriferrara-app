@@ -5,7 +5,6 @@
 <title>Classifiche Corriferrara</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- DataTables + jQuery + PapaParse -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
@@ -19,220 +18,33 @@
     padding: 0;
     color: #0a2540;
   }
-
   .page-wrapper {
     max-width: 1100px;
     margin: 20px auto 40px;
     padding: 25px;
-    background: #ffffff;
+    background: #fff;
     border-radius: 18px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   }
-
-  .page-title {
-    font-size: 28px;
-    font-weight: 800;
-    margin: 0 0 4px;
-    text-align: center;
-    color: #0a2540;
-  }
-
-  .page-subtitle {
-    text-align: center;
-    font-size: 15px;
-    color: #555;
-    margin: 0 0 22px;
-  }
+  .page-title { text-align:center; font-size:28px; font-weight:800; margin-bottom:5px; }
+  .page-subtitle { text-align:center; font-size:15px; color:#555; }
 
   .tabs-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 18px;
-    border-bottom: 1px solid rgba(10,37,64,0.12);
-    padding-bottom: 8px;
+    display:flex; flex-wrap:wrap; gap:8px;
+    margin-top:20px; padding-bottom:8px;
+    border-bottom:1px solid rgba(10,37,64,0.12);
   }
-
   .tab-button {
-    border: none;
-    padding: 8px 14px;
-    border-radius: 999px;
-    background: #e4ebf5;
-    color: #0a2540;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.18s ease;
+    border:none; padding:8px 14px; border-radius:999px;
+    background:#e4ebf5; color:#0a2540; cursor:pointer; font-weight:600;
   }
+  .tab-button.active { background:#0a2540; color:#fff; }
 
-  .tab-button.active {
-    background: #0a2540;
-    color: #ffffff;
-  }
-
-  .tab-content {
-    display: none;
-  }
-
-  .tab-content.active {
-    display: block;
-  }
+  .tab-content { display:none; }
+  .tab-content.active { display:block; }
 
   table.dataTable thead th {
-    background: #0a2540;
-    color: #ffffff;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    background:#0a2540; color:#fff; font-size:12px;
+    text-transform:uppercase; letter-spacing:.04em;
   }
-
-  table.dataTable tbody tr:nth-child(even) {
-    background-color: #f7f9fc;
-  }
-
-  table.dataTable tbody tr:hover {
-    background-color: #e9f0fb;
-  }
-
-  table.dataTable th,
-  table.dataTable td {
-    padding: 6px 8px;
-    font-size: 13px;
-    white-space: nowrap;
-  }
-</style>
-</head>
-<body>
-
-<div class="page-wrapper">
-
-  <h1 class="page-title">Classifiche Corriferrara 2025</h1>
-  <p class="page-subtitle">Le classifiche si aggiornano automaticamente dal foglio Google.</p>
-
-  <!-- Tabs -->
-  <div class="tabs-bar">
-    <button class="tab-button active" data-tab="tab-contakm">Conta Km</button>
-    <button class="tab-button" data-tab="tab-punti-m">Punti Maschile</button>
-    <button class="tab-button" data-tab="tab-punti-f">Punti Femminile</button>
-    <button class="tab-button" data-tab="tab-trail-m">Trail Maschile</button>
-    <button class="tab-button" data-tab="tab-trail-f">Trail Femminile</button>
-    <button class="tab-button" data-tab="tab-ranking-m">Ranking Maschile</button>
-    <button class="tab-button" data-tab="tab-ranking-f">Ranking Femminile</button>
-  </div>
-
-  <!-- Tabelle -->
-  <div id="tab-contakm" class="tab-content active">
-    <table id="table-contakm" class="display" style="width:100%"></table>
-  </div>
-
-  <div id="tab-punti-m" class="tab-content">
-    <table id="table-punti-m" class="display" style="width:100%"></table>
-  </div>
-
-  <div id="tab-punti-f" class="tab-content">
-    <table id="table-punti-f" class="display" style="width:100%"></table>
-  </div>
-
-  <div id="tab-trail-m" class="tab-content">
-    <table id="table-trail-m" class="display" style="width:100%"></table>
-  </div>
-
-  <div id="tab-trail-f" class="tab-content">
-    <table id="table-trail-f" class="display" style="width:100%"></table>
-  </div>
-
-  <div id="tab-ranking-m" class="tab-content">
-    <table id="table-ranking-m" class="display" style="width:100%"></table>
-  </div>
-
-  <div id="tab-ranking-f" class="tab-content">
-    <table id="table-ranking-f" class="display" style="width:100%"></table>
-  </div>
-
-</div>
-
-<script>
-// 🌐 URL CSV DIRETTI — FINALISSIMI
-const classificheConfig = [
-  {
-    tableId: 'table-contakm',
-    csvUrl: 'https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=CONTA%20KM'
-  },
-  {
-    tableId: 'table-punti-m',
-    csvUrl: 'https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Punti%20Maschile'
-  },
-  {
-    tableId: 'table-punti-f',
-    csvUrl: 'https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Punti%20Femminile'
-  },
-  {
-    tableId: 'table-trail-m',
-    csvUrl: 'https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Trail%20Maschile'
-  },
-  {
-    tableId: 'table-trail-f',
-    csvUrl: 'https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Trail%20Femminile'
-  },
-  {
-    tableId: 'table-ranking-m',
-    csvUrl: 'https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Ranking%20Maschile'
-  },
-  {
-    tableId: 'table-ranking-f',
-    csvUrl: 'https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Ranking%20Femminile'
-  }
-];
-
-// 📥 FUNZIONE CHE CARICA I CSV NELLE TABELLE
-function loadSheetIntoTable(cfg) {
-  Papa.parse(cfg.csvUrl, {
-    download: true,
-    complete: function(results) {
-      const data = results.data;
-      if (!data || data.length === 0) return;
-
-      const headers = data[0];
-      const rows = data.slice(1);
-
-      let html = '<thead><tr>';
-      headers.forEach(h => html += `<th>${h}</th>`);
-      html += '</tr></thead><tbody>';
-
-      rows.forEach(row => {
-        if (row.join('').trim() === '') return;
-        html += '<tr>';
-        row.forEach(c => html += `<td>${c}</td>`);
-        html += '</tr>';
-      });
-
-      html += '</tbody>';
-
-      document.getElementById(cfg.tableId).innerHTML = html;
-      $("#" + cfg.tableId).DataTable({
-        pageLength: 25,
-        language: { url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/it-IT.json" }
-      });
-    }
-  });
-}
-
-// 🔁 TABS
-document.querySelectorAll('.tab-button').forEach(btn => {
-  btn.addEventListener('click', ()=> {
-    document.querySelectorAll('.tab-button').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
-
-    btn.classList.add('active');
-    document.getElementById(btn.dataset.tab).classList.add('active');
-  });
-});
-
-// 🚀 CARICA TUTTE LE CLASSIFICHE
-document.addEventListener('DOMContentLoaded', ()=> {
-  classificheConfig.forEach(cfg => loadSheetIntoTable(cfg));
-});
-</script>
-
-</body>
-</html>
+  table.dataTable tbody tr:nth-child(even
