@@ -49,6 +49,10 @@
 
 <div class="page-wrapper">
 
+  <p style="color:#b22222;font-size:13px;">
+    Se leggi questo testo, l'HTML è caricato correttamente. Se le tabelle sotto sono vuote, il problema è nel caricamento dei dati.
+  </p>
+
   <h1 class="page-title">Classifiche Corriferrara 2025</h1>
   <p class="page-subtitle">Le classifiche si aggiornano automaticamente dal foglio Google.</p>
 
@@ -73,7 +77,6 @@
 </div>
 
 <script>
-
 // 🎯 LINK CSV gviz (compatibili CORS)
 const classifiche = [
   {
@@ -113,7 +116,10 @@ function loadCSV(cfg) {
     header: false,
     complete: function(res) {
       const data = res.data;
-      if (!data || data.length === 0) return;
+      if (!data || data.length === 0) {
+        console.log("Nessun dato per", cfg.id);
+        return;
+      }
 
       const header = data[0];
       const rows = data.slice(1);
@@ -136,6 +142,9 @@ function loadCSV(cfg) {
         pageLength: 25,
         language: { url:"https://cdn.datatables.net/plug-ins/1.13.6/i18n/it-IT.json" }
       });
+    },
+    error: function(err) {
+      console.log("Errore PapaParse per", cfg.id, err);
     }
   });
 }
@@ -154,7 +163,6 @@ document.querySelectorAll(".tab-button").forEach(btn => {
 document.addEventListener("DOMContentLoaded", () => {
   classifiche.forEach(loadCSV);
 });
-
 </script>
 
 </body>
