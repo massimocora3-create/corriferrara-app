@@ -107,7 +107,7 @@
 <div class="page-wrapper">
 
   <h1 class="page-title">Classifiche Corriferrara 2025</h1>
-  <p class="page-subtitle">Le classifiche si aggiornano automaticamente.</p>
+  <p class="page-subtitle">Le classifiche si aggiornano automaticamente dal foglio Google.</p>
 
   <!-- Tabs -->
   <div class="tabs-bar">
@@ -152,39 +152,55 @@
 </div>
 
 <script>
-const SPREADSHEET_ID = '1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg';
-
+// 🌐 URL CSV DIRETTI — FINALISSIMI
 const classificheConfig = [
-  { tableId: 'table-contakm',    sheetName: 'CONTA KM',         range: 'A1:Z500' },
-  { tableId: 'table-punti-m',    sheetName: 'Punti Maschile',   range: 'A1:Z500' },
-  { tableId: 'table-punti-f',    sheetName: 'Punti Femminile',  range: 'A1:Z500' },
-  { tableId: 'table-trail-m',    sheetName: 'Trail Maschile',   range: 'A1:Z500' },
-  { tableId: 'table-trail-f',    sheetName: 'Trail Femminile',  range: 'A1:Z500' },
-  { tableId: 'table-ranking-m',  sheetName: 'Ranking Maschile', range: 'A1:Z500' },
-  { tableId: 'table-ranking-f',  sheetName: 'Ranking Femminile',range: 'A1:Z500' }
+  {
+    tableId: 'table-contakm',
+    csvUrl: 'https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=CONTA%20KM'
+  },
+  {
+    tableId: 'table-punti-m',
+    csvUrl: 'https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Punti%20Maschile'
+  },
+  {
+    tableId: 'table-punti-f',
+    csvUrl: 'https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Punti%20Femminile'
+  },
+  {
+    tableId: 'table-trail-m',
+    csvUrl: 'https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Trail%20Maschile'
+  },
+  {
+    tableId: 'table-trail-f',
+    csvUrl: 'https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Trail%20Femminile'
+  },
+  {
+    tableId: 'table-ranking-m',
+    csvUrl: 'https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Ranking%20Maschile'
+  },
+  {
+    tableId: 'table-ranking-f',
+    csvUrl: 'https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Ranking%20Femminile'
+  }
 ];
 
-function isUsefulRow(row) {
-  return row.some(cell => cell && cell.toString().trim() !== '');
-}
-
+// 📥 FUNZIONE CHE CARICA I CSV NELLE TABELLE
 function loadSheetIntoTable(cfg) {
-  const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(cfg.sheetName)}&range=${encodeURIComponent(cfg.range)}`;
-
-  Papa.parse(url, {
+  Papa.parse(cfg.csvUrl, {
     download: true,
     complete: function(results) {
       const data = results.data;
       if (!data || data.length === 0) return;
 
       const headers = data[0];
-      const rows = data.slice(1).filter(isUsefulRow);
+      const rows = data.slice(1);
 
       let html = '<thead><tr>';
       headers.forEach(h => html += `<th>${h}</th>`);
       html += '</tr></thead><tbody>';
 
       rows.forEach(row => {
+        if (row.join('').trim() === '') return;
         html += '<tr>';
         row.forEach(c => html += `<td>${c}</td>`);
         html += '</tr>';
@@ -201,6 +217,7 @@ function loadSheetIntoTable(cfg) {
   });
 }
 
+// 🔁 TABS
 document.querySelectorAll('.tab-button').forEach(btn => {
   btn.addEventListener('click', ()=> {
     document.querySelectorAll('.tab-button').forEach(b=>b.classList.remove('active'));
@@ -211,6 +228,7 @@ document.querySelectorAll('.tab-button').forEach(btn => {
   });
 });
 
+// 🚀 CARICA TUTTE LE CLASSIFICHE
 document.addEventListener('DOMContentLoaded', ()=> {
   classificheConfig.forEach(cfg => loadSheetIntoTable(cfg));
 });
