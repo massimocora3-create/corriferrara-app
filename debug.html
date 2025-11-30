@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DEBUG CLASSIFICHE</title>
+<style>
+body { font-family: monospace; background: #111; color: #0f0; padding: 20px; }
+.box { border: 1px solid #0f0; padding: 10px; margin-bottom: 20px; }
+.ok { color: #0f0; }
+.err { color: #f00; }
+</style>
+</head>
+<body>
+
+<h1>DEBUG CLASSIFICHE</h1>
+<p>Qui vediamo cosa sta rompendo i caricamenti.</p>
+
+<div id="output"></div>
+
+<script>
+const PROXY = "https://cors.isomorphic-git.org/";
+
+const URLS = {
+  "Conta KM": "https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Conta%20KM",
+  "Punti Maschile": "https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Punti%20Maschile",
+  "Punti Femminile": "https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Punti%20Femminile",
+  "Trail Maschile": "https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Trail%20Maschile",
+  "Trail Femminile": "https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Trail%20Femminile",
+  "Ranking Maschile": "https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Ranking%20Maschile",
+  "Ranking Femminile": "https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Ranking%20Femminile"
+};
+
+async function runDebug() {
+  const out = document.getElementById("output");
+  out.innerHTML = "";
+
+  for (let name in URLS) {
+    const url = URLS[name];
+    let box = document.createElement("div");
+    box.className = "box";
+    box.innerHTML = `<h2>${name}</h2>`;
+
+    try {
+      const r = await fetch(PROXY + url);
+      const csv = await r.text();
+
+      if (!csv.trim()) {
+        box.innerHTML += `<p class="err">⚠️ CSV VUOTO</p>`;
+        out.appendChild(box);
+        continue;
+      }
+
+      const rows = csv.trim().split("\n");
+      const header = rows[0].split(",");
+
+      box.innerHTML += `<p class="ok">Colonne trovate: ${header.length}</p>`;
+      box.innerHTML += `<p>Prime 3 righe:<br>${rows.slice(0,3).join("<br>")}</p>`;
+
+      // Controllo se TUTTE le righe hanno questo numero di colonne
+      let errors = 0;
+      for (let i = 1; i < rows.length; i++) {
+        const count = rows[i].split(",").length;
+        if (count !== header.length) {
+          errors++;
+          box.innerHTML += `<p class="err">Riga ${i+1}: colonne ${count} (diverse da ${header.length})</p>`;
+        }
+      }
+
+      if (!errors)
+        box.innerHTML += `<p class="ok">✔ Nessuna riga con colonne sbagliate</p>`;
+      else
+        box.innerHTML += `<p class="err">❌ ${errors} righe con colonne sbagliate</p>`;
+
+    } catch (e) {
+      box.innerHTML += `<p class="err">ERRORE: ${e}</p>`;
+    }
+
+    out.appendChild(box);
+  }
+}
+
+runDebug();
+</script>
+
+</body>
+</html>
