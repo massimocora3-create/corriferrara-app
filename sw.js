@@ -1,12 +1,26 @@
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open("corriferrara-cache").then(cache => {
+    caches.open("corriferrara-cache-v2").then(cache => {
       return cache.addAll([
-        "/corriferrara-app/",
-        "/corriferrara-app/index.html"
+        "./",
+        "./index.html"
       ]);
     })
   );
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", event => {
+  event.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(
+        keys
+          .filter(key => key !== "corriferrara-cache-v2")
+          .map(key => caches.delete(key))
+      );
+    })
+  );
+  self.clients.claim();
 });
 
 self.addEventListener("fetch", event => {
