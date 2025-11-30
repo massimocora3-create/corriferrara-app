@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="utf-8" />
-<title>Classifiche Corriferrara</title>
+<meta charset="UTF-8">
+<title>Classifiche Corriferrara 2025</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
@@ -10,115 +10,102 @@
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 
 <style>
-  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:#f4f6fa; margin:0; padding:0; color:#0a2540; }
-  .page-wrapper { max-width:1100px; margin:20px auto; padding:25px; background:#fff; border-radius:18px; box-shadow:0 10px 30px rgba(0,0,0,0.08); }
-  .page-title { text-align:center; font-size:28px; font-weight:800; margin-bottom:5px; }
-  .page-subtitle { text-align:center; font-size:15px; color:#555; }
-
-  .tabs-bar { display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; padding-bottom:8px; border-bottom:1px solid rgba(10,37,64,0.12); }
-  .tab-button { border:none; padding:8px 14px; border-radius:999px; background:#e4ebf5; color:#0a2540; cursor:pointer; font-weight:600; }
-  .tab-button.active { background:#0a2540; color:#fff; }
-
-  .tab-content { display:none; margin-top:20px; }
-  .tab-content.active { display:block; }
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: #f4f6fa;
+  margin: 0; padding: 0;
+}
+.page-wrapper {
+  max-width: 1100px; margin: 20px auto; padding: 25px;
+  background: #fff; border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+.tabs-bar {
+  display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; padding-bottom:10px;
+  border-bottom:1px solid rgba(0,0,0,0.15);
+}
+.tab-button { padding:8px 14px; border:none; border-radius:20px; cursor:pointer;
+  background:#e4ebf5; color:#000; }
+.tab-button.active { background:#0a2540; color:#fff; }
+.tab-content { display:none; margin-top:20px; }
+.tab-content.active { display:block; }
 </style>
-
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script>
-google.charts.load('current', {packages:['table']});
-
-// ID SHEET
-const SHEET_ID = "1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg";
-
-// CONFIG FOGLI
-const FOGLI = {
-  "table-contakm": "Conta KM",
-  "table-punti-m": "Punti Maschile",
-  "table-punti-f": "Punti Femminile",
-  "table-trail-m": "Trail Maschile",
-  "table-trail-f": "Trail Femminile",
-  "table-ranking-m": "Ranking Maschile",
-  "table-ranking-f": "Ranking Femminile"
-};
-
-google.charts.setOnLoadCallback(loadAllTables);
-
-function loadAllTables() {
-  for (let id in FOGLI) {
-    loadSheet(id, FOGLI[id]);
-  }
-}
-
-function loadSheet(tableId, sheetName) {
-  const query = new google.visualization.Query(
-    `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(sheetName)}`
-  );
-
-  query.send(function(response) {
-    if (response.isError()) {
-      document.getElementById(tableId).innerHTML = "Errore nel caricamento dati";
-      return;
-    }
-
-    const data = response.getDataTable();
-    const htmlTable = google.visualization.dataTableToCsv(data);
-    const rows = htmlTable.split("\n").map(r => r.split(","));
-
-    // Costruisco HTML
-    let html = "<table class='display' id='" + tableId + "-dt'><thead><tr>";
-
-    rows[0].forEach(h => html += `<th>${h}</th>`);
-    html += "</tr></thead><tbody>";
-
-    for (let i = 1; i < rows.length; i++) {
-      if (!rows[i].join("").trim()) continue;
-      html += "<tr>";
-      rows[i].forEach(c => html += `<td>${c}</td>`);
-      html += "</tr>";
-    }
-
-    html += "</tbody></table>";
-
-    document.getElementById(tableId).innerHTML = html;
-
-    $("#" + tableId + "-dt").DataTable({
-      pageLength: 25,
-      language: { url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/it-IT.json" }
-    });
-  });
-}
-</script>
 
 </head>
 <body>
 
 <div class="page-wrapper">
 
-  <h1 class="page-title">Classifiche Corriferrara 2025</h1>
-  <p class="page-subtitle">Aggiornate automaticamente dal foglio Google.</p>
+<h1 style="text-align:center;font-size:28px;font-weight:800;">Classifiche Corriferrara 2025</h1>
+<p style="text-align:center;color:#555;">Aggiornate automaticamente dal foglio Google.</p>
 
-  <div class="tabs-bar">
-    <button class="tab-button active" data-tab="tab-contakm">Conta KM</button>
-    <button class="tab-button" data-tab="tab-punti-m">Punti Maschile</button>
-    <button class="tab-button" data-tab="tab-punti-f">Punti Femminile</button>
-    <button class="tab-button" data-tab="tab-trail-m">Trail Maschile</button>
-    <button class="tab-button" data-tab="tab-trail-f">Trail Femminile</button>
-    <button class="tab-button" data-tab="tab-ranking-m">Ranking Maschile</button>
-    <button class="tab-button" data-tab="tab-ranking-f">Ranking Femminile</button>
-  </div>
+<div class="tabs-bar">
+  <button class="tab-button active" data-tab="contakm">Conta KM</button>
+  <button class="tab-button" data-tab="puntim">Punti Maschile</button>
+  <button class="tab-button" data-tab="puntif">Punti Femminile</button>
+  <button class="tab-button" data-tab="trailm">Trail Maschile</button>
+  <button class="tab-button" data-tab="trailf">Trail Femminile</button>
+  <button class="tab-button" data-tab="rankm">Ranking Maschile</button>
+  <button class="tab-button" data-tab="rankf">Ranking Femminile</button>
+</div>
 
-  <div id="tab-contakm" class="tab-content active"><div id="table-contakm"></div></div>
-  <div id="tab-punti-m" class="tab-content"><div id="table-punti-m"></div></div>
-  <div id="tab-punti-f" class="tab-content"><div id="table-punti-f"></div></div>
-  <div id="tab-trail-m" class="tab-content"><div id="table-trail-m"></div></div>
-  <div id="tab-trail-f" class="tab-content"><div id="table-trail-f"></div></div>
-  <div id="tab-ranking-m" class="tab-content"><div id="table-ranking-m"></div></div>
-  <div id="tab-ranking-f" class="tab-content"><div id="table-ranking-f"></div></div>
+<div id="contakm" class="tab-content active"><table id="t-contakm" class="display"></table></div>
+<div id="puntim" class="tab-content"><table id="t-puntim" class="display"></table></div>
+<div id="puntif" class="tab-content"><table id="t-puntif" class="display"></table></div>
+<div id="trailm" class="tab-content"><table id="t-trailm" class="display"></table></div>
+<div id="trailf" class="tab-content"><table id="t-trailf" class="display"></table></div>
+<div id="rankm" class="tab-content"><table id="t-rankm" class="display"></table></div>
+<div id="rankf" class="tab-content"><table id="t-rankf" class="display"></table></div>
 
 </div>
 
 <script>
-// Tabs
+// PROXY CHE SBLOCCA GOOGLE (FUNZIONA SEMPRE)
+const PROXY = "https://cors.isomorphic-git.org/";
+
+// LINK CSV DEI FOGLI
+const URLS = {
+  "t-contakm": "https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Conta%20KM",
+  "t-puntim": "https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Punti%20Maschile",
+  "t-puntif": "https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Punti%20Femminile",
+  "t-trailm": "https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Trail%20Maschile",
+  "t-trailf": "https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Trail%20Femminile",
+  "t-rankm": "https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Ranking%20Maschile",
+  "t-rankf": "https://docs.google.com/spreadsheets/d/1uVa58NHACO4BtcMNxDWpx-AKbFe5P1DOxQSloJ29bUg/gviz/tq?tqx=out:csv&sheet=Ranking%20Femminile"
+};
+
+async function loadCSV(tableId, url) {
+  const response = await fetch(PROXY + url);
+  const csv = await response.text();
+
+  const rows = csv.trim().split("\n").map(r => r.split(","));
+
+  const header = rows[0];
+  const body = rows.slice(1);
+
+  let html = "<thead><tr>";
+  header.forEach(h => html += `<th>${h}</th>`);
+  html += "</tr></thead><tbody>";
+
+  body.forEach(r => {
+    html += "<tr>";
+    r.forEach(c => html += `<td>${c}</td>`);
+    html += "</tr>";
+  });
+
+  html += "</tbody>";
+
+  document.getElementById(tableId).innerHTML = html;
+
+  $("#" + tableId).DataTable({
+    pageLength: 25,
+    language: { url:"https://cdn.datatables.net/plug-ins/1.13.6/i18n/it-IT.json" }
+  });
+}
+
+Object.keys(URLS).forEach(id => loadCSV(id, URLS[id]));
+
+// TABS
 document.querySelectorAll(".tab-button").forEach(btn => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".tab-button").forEach(b => b.classList.remove("active"));
