@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v3'; // <-- aumenta a v2, v3, v4... ad ogni aggiornamento
+const CACHE_VERSION = 'v7'; // <-- aumenta a v2, v3, v4... ad ogni aggiornamento
 const CACHE_NAME = `corriferrara-${CACHE_VERSION}`;
 
 // Metti qui le pagine/risorse che devono SEMPRE funzionare
