@@ -250,30 +250,39 @@ function openBiblioteca() {
 </div>
 
 <script>
-const feedUrl = "https://atleticacorriferrara.blogspot.com/feeds/posts/default?alt=json&max-results=6";
-
-fetch(feedUrl)
-.then(r => r.json())
-.then(data => {
+function caricaNews(data) {
   const box = document.getElementById("news-list");
   box.innerHTML = "";
+
+  if (!data.feed || !data.feed.entry) {
+    box.innerHTML = "<p>Nessun articolo disponibile.</p>";
+    return;
+  }
+
   data.feed.entry.forEach(e => {
     const title = e.title.$t;
     const link = e.link.find(l => l.rel === "alternate").href;
     const date = new Date(e.published.$t).toLocaleDateString("it-IT");
+
     let img = "https://via.placeholder.com/800x400?text=Corriferrara";
-    if (e.media$thumbnail) img = e.media$thumbnail.url.replace("s72-c","s800");
+    if (e.media$thumbnail) {
+      img = e.media$thumbnail.url.replace("s72-c", "s800");
+    }
+
     box.innerHTML += `
       <div class="news-card" onclick="openLink('${link}')">
-        <img src="${img}">
+        <img src="${img}" alt="${title}">
         <div class="news-content">
           <div class="news-title">${title}</div>
           <div class="news-date">${date}</div>
         </div>
-      </div>`;
+      </div>
+    `;
   });
-});
+}
 </script>
+
+<script src="https://atleticacorriferrara.blogspot.com/feeds/posts/default?alt=json-in-script&max-results=6&callback=caricaNews"></script>
 
 </body>
 </html>
