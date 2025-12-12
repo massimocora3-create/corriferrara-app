@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Corriferrara – App</title>
-
 <link rel="manifest" href="https://massimocora3-create.github.io/corriferrara-app/manifest.json">
 <meta name="theme-color" content="#003d7a">
 
@@ -23,6 +21,7 @@ body {
   color: #111;
 }
 
+/* Header */
 .header {
   background: #003d7a;
   padding: 25px 15px;
@@ -32,6 +31,7 @@ body {
   font-weight: 700;
 }
 
+/* Griglia */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -39,6 +39,7 @@ body {
   padding: 20px;
 }
 
+/* Box principali */
 .box {
   background: #005bb5;
   padding: 20px;
@@ -46,6 +47,7 @@ body {
   color: #fff;
   font-size: 18px;
   cursor: pointer;
+  text-align: left;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -58,17 +60,25 @@ body {
   background: #003d7a;
 }
 
+/* Icone testo semplice */
 .icon {
   font-size: 22px;
   font-weight: bold;
 }
 
+/* Sottomenù */
 .submenu {
   display: none;
   background: #e2edff;
-  padding: 10px 15px 15px;
-  margin: -10px 20px 10px;
+  padding: 10px 15px 15px 15px;
+  margin: -10px 20px 10px 20px;
   border-radius: 8px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
 }
 
 .subbox {
@@ -79,12 +89,14 @@ body {
   font-size: 16px;
   border-left: 4px solid #005bb5;
   cursor: pointer;
+  font-weight: 500;
 }
 
 .subbox:hover {
   background: #d7e6ff;
 }
 
+/* Testo più piccolo */
 .label-small {
   font-size: 14px;
   opacity: 0.8;
@@ -109,44 +121,106 @@ function toggleSub(id) {
   el.style.display = el.style.display === "block" ? "none" : "block";
 }
 </script>
+
 </head>
 
 <body>
 
-<div class="header">Corriferrara – APP</div>
+<div class="header">
+  Corriferrara – APP
+</div>
 
 <div class="grid">
 
   <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/storia-della-corriferrara-asd.html')">
-    <div class="icon">01</div>Chi siamo<br><span class="label-small">Storia, valori, missione</span>
+    <div class="icon">01</div>
+    Chi siamo<br><span class="label-small">Storia, valori, missione</span>
   </div>
 
   <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/news.html')">
-    <div class="icon">02</div>News<br><span class="label-small">Tutte le novità</span>
+    <div class="icon">02</div>
+    News<br><span class="label-small">Tutte le novità</span>
   </div>
 
   <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/dove-si-corre.html')">
-    <div class="icon">03</div>Dove si corre<br><span class="label-small">Calendari gare</span>
+    <div class="icon">03</div>
+    Dove si corre<br><span class="label-small">Calendari gare</span>
   </div>
 
   <div class="box" onclick="openLink('https://goo.gl/forms/WzRBTqYzxg0jbOCH3')">
-    <div class="icon">04</div>Dove ho corso
+    <div class="icon">04</div>
+    Dove ho corso<br><span class="label-small">Inserisci le tue gare</span>
   </div>
 
   <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/classifiche.html')">
-    <div class="icon">05</div>Classifiche
+    <div class="icon">05</div>
+    Classifiche<br><span class="label-small">Classifiche + Calcolo punti</span>
   </div>
 
   <div class="box" onclick="toggleSub('sub6')">
-    <div class="icon">06</div>Tesseramento
-  </div>
-  <div id="sub6" class="submenu">
-    <div class="subbox" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/tesseramento-corriferrara-2019.html')">Rinnovo tessera</div>
-    <div class="subbox" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/tessere-corriferrara_26.html')">Numero tessera</div>
+    <div class="icon">06</div>
+    Tesseramento<br><span class="label-small">Rinnovo + controllo tessera</span>
   </div>
 
+  <div id="sub6" class="submenu">
+    <div class="subbox" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/tesseramento-corriferrara-2019.html')">Rinnova la tua tessera</div>
+    <div class="subbox" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/tessere-corriferrara_26.html')">Numero e scadenza tessera</div>
+  </div>
+
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/pre-iscrizioni-prossime-gare-e-eventi.html')">
+    <div class="icon">07</div>
+    Pre-iscrizioni gare &amp; eventi
+  </div>
+
+  <div class="box" onclick="toggleSub('sub8')">
+    <div class="icon">08</div>
+    Certificato medico
+  </div>
+
+  <div id="sub8" class="submenu">
+    <div class="subbox" onclick="openLink('https://docs.google.com/forms/d/e/1FAIpQLSc-IrRlvTx6xbkoPPT8SdDc3X3yOwDIwdlF0gLZ-PVzS9NVPg/viewform?usp=sf_link')">Carica certificato</div>
+    <div class="subbox" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/controlla-la-scadenza-del-tuo.html')">Controlla scadenza</div>
+  </div>
+
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/allenamenti-collettivi.html')">
+    <div class="icon">09</div>
+    Allenamenti collettivi
+  </div>
+
+  <div class="box" onclick="openLink('https://www.runnerschoolitalia.com/')">
+    <div class="icon">10</div>
+    Runner&#39;s School Italia
+  </div>
+
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/trail-running.html')">
+    <div class="icon">11</div>
+    Trail Section
+  </div>
+
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/fc-bike-team.html')">
+    <div class="icon">12</div>
+    Bike Team
+  </div>
+
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/abbigliamento-corriferrara_18.html')">
+    <div class="icon">13</div>
+    Abbigliamento ufficiale
+  </div>
+
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/contatti.html')">
+    <div class="icon">14</div>
+    Contatti
+  </div>
+
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/sponsor.html')">
+    <div class="icon">15</div>
+    Sponsor &amp; Convenzioni
+  </div>
+
+  <!-- Biblioteca: ora apre ESTERNO, niente iframe, niente cookie ripetuti -->
   <div class="box" onclick="openBiblioteca()">
-    <div class="icon">16</div>Biblioteca Corriferrara<br>
+    <div class="icon">16</div>
+    Biblioteca Corriferrara<br>
     <span class="label-small">Libri, prestiti e prenotazioni</span>
   </div>
 
@@ -154,4 +228,5 @@ function toggleSub(id) {
 
 </body>
 </html>
+
 
