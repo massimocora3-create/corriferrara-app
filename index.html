@@ -4,15 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Corriferrara App</title>
+<title>Corriferrara – App</title>
 
-<!-- Manifest -->
 <link rel="manifest" href="manifest.json">
-
-<!-- Theme color -->
 <meta name="theme-color" content="#003d7a">
 
-<!-- Service Worker -->
 <script>
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js");
@@ -20,175 +16,265 @@ if ("serviceWorker" in navigator) {
 </script>
 
 <style>
-/* RESET */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-/* BASE */
 body {
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   background: #f2f6fc;
-  color: #0a2540;
+  color: #111;
 }
 
 /* HEADER */
 .header {
   background: #003d7a;
-  color: #fff;
-  padding: 22px 16px;
+  padding: 25px 15px;
   text-align: center;
-}
-
-.header h1 {
-  margin: 0;
+  color: #fff;
   font-size: 22px;
+  font-weight: 700;
 }
 
-.header p {
-  margin: 6px 0 0;
-  font-size: 14px;
-  opacity: 0.9;
-}
-
-/* CONTENUTO */
-.container {
-  max-width: 900px;
-  margin: auto;
+/* GRID MENU */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 15px;
   padding: 20px;
 }
 
-/* BOTTONI HOME */
-.home-buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+/* BOX */
+.box {
+  background: #005bb5;
+  padding: 20px;
+  border-radius: 14px;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
   gap: 14px;
-  margin-bottom: 30px;
+  align-items: center;
 }
 
-.home-btn {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 18px;
-  text-align: center;
-  font-weight: 600;
-  color: #003d7a;
-  text-decoration: none;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+.box:hover {
+  background: #003d7a;
+}
+
+.icon {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.label-small {
+  font-size: 14px;
+  opacity: 0.85;
+  font-weight: 400;
+}
+
+/* SUBMENU */
+.submenu {
+  display: none;
+  background: #e2edff;
+  padding: 12px 15px;
+  margin: -10px 20px 10px;
+  border-radius: 10px;
+}
+
+.subbox {
+  background: #f7faff;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-size: 15px;
+  border-left: 4px solid #005bb5;
+  cursor: pointer;
 }
 
 /* NEWS */
+.news-section {
+  padding: 0 20px 20px;
+}
+
 .news-section h2 {
   font-size: 20px;
-  margin-bottom: 15px;
   color: #003d7a;
+  margin-bottom: 15px;
 }
 
 .news-card {
-  background: #ffffff;
-  border-radius: 14px;
-  padding: 14px 16px;
-  margin-bottom: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  background: #fff;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.news-card a {
-  text-decoration: none;
-  color: #0a2540;
-  display: block;
+.news-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.news-content {
+  padding: 14px 16px;
 }
 
 .news-title {
   font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 6px;
+  font-weight: 700;
 }
 
 .news-date {
   font-size: 12px;
   color: #777;
 }
-
-/* FOOTER */
-.footer {
-  text-align: center;
-  font-size: 13px;
-  color: #666;
-  margin: 30px 0 10px;
-}
 </style>
+
+<script>
+function openLink(url) {
+  window.open(url, "_blank");
+}
+function toggleSub(id) {
+  const el = document.getElementById(id);
+  el.style.display = el.style.display === "block" ? "none" : "block";
+}
+function openBiblioteca() {
+  window.open("https://atleticacorriferrara.blogspot.com/p/biblioteca-corriferrara.html","_blank");
+}
+</script>
+
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <h1>Corriferrara</h1>
-  <p>La tua community, sempre con te</p>
-</div>
+<div class="header">Corriferrara – APP</div>
 
-<!-- CONTENUTO -->
-<div class="container">
+<!-- MENU 16 SEZIONI -->
+<div class="grid">
 
-  <!-- BOTTONI PRINCIPALI -->
-  <div class="home-buttons">
-    <a class="home-btn" href="https://www.corriferrara.it" target="_blank">🌐 Blog</a>
-    <a class="home-btn" href="https://www.runnerschoolitalia.com" target="_blank">🏃 Runner’s School</a>
-    <a class="home-btn" href="https://www.corriferrara.it/p/trail-section.html" target="_blank">🌲 Trail Section</a>
-    <a class="home-btn" href="https://www.corriferrara.it/p/classifiche.html" target="_blank">📊 Classifiche</a>
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/storia-della-corriferrara-asd.html')">
+    <div class="icon">01</div>
+    <div>Chi siamo<br><span class="label-small">Storia, valori, missione</span></div>
   </div>
 
-  <!-- NEWS -->
-  <section class="news-section">
-    <h2>📰 Ultime notizie Corriferrara</h2>
-    <div id="news-list">
-      <p>Caricamento notizie...</p>
-    </div>
-  </section>
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com')">
+    <div class="icon">02</div>
+    <div>News<br><span class="label-small">Tutte le novità</span></div>
+  </div>
+
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/dove-si-corre.html')">
+    <div class="icon">03</div>
+    <div>Dove si corre<br><span class="label-small">Calendari gare</span></div>
+  </div>
+
+  <div class="box" onclick="openLink('https://goo.gl/forms/WzRBTqYzxg0jbOCH3')">
+    <div class="icon">04</div>
+    <div>Dove ho corso</div>
+  </div>
+
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/classifiche.html')">
+    <div class="icon">05</div>
+    <div>Classifiche</div>
+  </div>
+
+  <div class="box" onclick="toggleSub('sub6')">
+    <div class="icon">06</div>
+    <div>Tesseramento</div>
+  </div>
+  <div id="sub6" class="submenu">
+    <div class="subbox" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/tesseramento-corriferrara-2019.html')">Rinnovo tessera</div>
+    <div class="subbox" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/tessere-corriferrara_26.html')">Numero tessera</div>
+  </div>
+
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/pre-iscrizioni-prossime-gare-e-eventi.html')">
+    <div class="icon">07</div>
+    <div>Pre-iscrizioni gare</div>
+  </div>
+
+  <div class="box" onclick="toggleSub('sub8')">
+    <div class="icon">08</div>
+    <div>Certificato medico</div>
+  </div>
+  <div id="sub8" class="submenu">
+    <div class="subbox" onclick="openLink('https://docs.google.com/forms/d/e/1FAIpQLSc-IrRlvTx6xbkoPPT8SdDc3X3yOwDIwdlF0gLZ-PVzS9NVPg/viewform')">Carica certificato</div>
+    <div class="subbox" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/controlla-la-scadenza-del-tuo.html')">Controlla scadenza</div>
+  </div>
+
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/allenamenti-collettivi.html')">
+    <div class="icon">09</div>
+    <div>Allenamenti collettivi</div>
+  </div>
+
+  <div class="box" onclick="openLink('https://www.runnerschoolitalia.com')">
+    <div class="icon">10</div>
+    <div>Runner’s School Italia</div>
+  </div>
+
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/trail-running.html')">
+    <div class="icon">11</div>
+    <div>Trail Section</div>
+  </div>
+
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/fc-bike-team.html')">
+    <div class="icon">12</div>
+    <div>Bike Team</div>
+  </div>
+
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/abbigliamento-corriferrara_18.html')">
+    <div class="icon">13</div>
+    <div>Abbigliamento ufficiale</div>
+  </div>
+
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/contatti.html')">
+    <div class="icon">14</div>
+    <div>Contatti</div>
+  </div>
+
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/sponsor.html')">
+    <div class="icon">15</div>
+    <div>Sponsor & Convenzioni</div>
+  </div>
+
+  <div class="box" onclick="openBiblioteca()">
+    <div class="icon">16</div>
+    <div>Biblioteca Corriferrara<br><span class="label-small">Libri e prestiti</span></div>
+  </div>
 
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
-  💙💛 Viva Corriferrara
+<!-- NEWS LIVE -->
+<div class="news-section">
+  <h2>📰 Ultime notizie Corriferrara</h2>
+  <div id="news-list">Caricamento…</div>
 </div>
 
-<!-- SCRIPT NEWS -->
 <script>
-const feedUrl = "https://www.corriferrara.it/feeds/posts/default?alt=json&max-results=8";
+const feedUrl = "https://atleticacorriferrara.blogspot.com/feeds/posts/default?alt=json&max-results=6";
 
 fetch(feedUrl)
-  .then(response => response.json())
-  .then(data => {
-    const container = document.getElementById("news-list");
-    container.innerHTML = "";
-
-    data.feed.entry.forEach(entry => {
-      const title = entry.title.$t;
-      const link = entry.link.find(l => l.rel === "alternate").href;
-      const date = new Date(entry.published.$t).toLocaleDateString("it-IT");
-
-      const card = document.createElement("div");
-      card.className = "news-card";
-
-      card.innerHTML = `
-        <a href="${link}" target="_blank">
+.then(r => r.json())
+.then(data => {
+  const box = document.getElementById("news-list");
+  box.innerHTML = "";
+  data.feed.entry.forEach(e => {
+    const title = e.title.$t;
+    const link = e.link.find(l => l.rel === "alternate").href;
+    const date = new Date(e.published.$t).toLocaleDateString("it-IT");
+    let img = "https://via.placeholder.com/800x400?text=Corriferrara";
+    if (e.media$thumbnail) img = e.media$thumbnail.url.replace("s72-c","s800");
+    box.innerHTML += `
+      <div class="news-card" onclick="openLink('${link}')">
+        <img src="${img}">
+        <div class="news-content">
           <div class="news-title">${title}</div>
           <div class="news-date">${date}</div>
-        </a>
-      `;
-
-      container.appendChild(card);
-    });
-  })
-  .catch(() => {
-    document.getElementById("news-list").innerHTML =
-      "<p>Impossibile caricare le notizie.</p>";
+        </div>
+      </div>`;
   });
+});
 </script>
 
 </body>
 </html>
-
 
