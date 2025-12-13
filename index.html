@@ -9,15 +9,6 @@
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#003d7a">
 
-<!--
-<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js");
-}
-</script>
--->
-
-
 <style>
 * { box-sizing: border-box; }
 
@@ -38,15 +29,31 @@ body {
   font-weight: 700;
 }
 
+/* MENU BUTTON */
+.menu-btn {
+  margin: 20px;
+  background: #005bb5;
+  color: #fff;
+  padding: 16px;
+  border-radius: 14px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.menu-btn:hover {
+  background: #003d7a;
+}
+
 /* GRID MENU */
 .grid {
-  display: grid;
+  display: none;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 15px;
   padding: 20px;
 }
 
-/* BOX */
 .box {
   background: #005bb5;
   padding: 20px;
@@ -60,9 +67,7 @@ body {
   align-items: center;
 }
 
-.box:hover {
-  background: #003d7a;
-}
+.box:hover { background: #003d7a; }
 
 .icon {
   font-size: 22px;
@@ -114,7 +119,6 @@ body {
   display: flex;
 }
 
-
 .news-card img {
   width: 120px;
   height: 90px;
@@ -141,12 +145,16 @@ body {
 function openLink(url) {
   window.open(url, "_blank");
 }
+function toggleMenu() {
+  const g = document.getElementById("menuGrid");
+  g.style.display = g.style.display === "grid" ? "none" : "grid";
+}
 function toggleSub(id) {
   const el = document.getElementById(id);
   el.style.display = el.style.display === "block" ? "none" : "block";
 }
 function openBiblioteca() {
-  window.open("https://atleticacorriferrara.blogspot.com/p/biblioteca-corriferrara.html","_blank");
+  openLink("https://atleticacorriferrara.blogspot.com/p/biblioteca-corriferrara.html");
 }
 </script>
 
@@ -156,134 +164,71 @@ function openBiblioteca() {
 
 <div class="header">Corriferrara – APP</div>
 
-<!-- MENU 16 SEZIONI -->
-<div class="grid">
+<!-- MENU BUTTON -->
+<div class="menu-btn" onclick="toggleMenu()">☰ MENU CORRIFERRARA</div>
 
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/storia-della-corriferrara-asd.html')">
-    <div class="icon">01</div>
-    <div>Chi siamo<br><span class="label-small">Storia, valori, missione</span></div>
-  </div>
+<!-- MENU GRID -->
+<div id="menuGrid" class="grid">
 
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com')">
-    <div class="icon">02</div>
-    <div>News<br><span class="label-small">Tutte le novità</span></div>
-  </div>
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/storia-della-corriferrara-asd.html')"><div class="icon">01</div>Chi siamo</div>
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com')"><div class="icon">02</div>News</div>
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/dove-si-corre.html')"><div class="icon">03</div>Dove si corre</div>
+  <div class="box" onclick="openLink('https://goo.gl/forms/WzRBTqYzxg0jbOCH3')"><div class="icon">04</div>Dove ho corso</div>
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/classifiche.html')"><div class="icon">05</div>Classifiche</div>
 
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/dove-si-corre.html')">
-    <div class="icon">03</div>
-    <div>Dove si corre<br><span class="label-small">Calendari gare</span></div>
-  </div>
-
-  <div class="box" onclick="openLink('https://goo.gl/forms/WzRBTqYzxg0jbOCH3')">
-    <div class="icon">04</div>
-    <div>Dove ho corso</div>
-  </div>
-
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/classifiche.html')">
-    <div class="icon">05</div>
-    <div>Classifiche</div>
-  </div>
-
-  <div class="box" onclick="toggleSub('sub6')">
-    <div class="icon">06</div>
-    <div>Tesseramento</div>
-  </div>
+  <div class="box" onclick="toggleSub('sub6')"><div class="icon">06</div>Tesseramento</div>
   <div id="sub6" class="submenu">
     <div class="subbox" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/tesseramento-corriferrara-2019.html')">Rinnovo tessera</div>
     <div class="subbox" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/tessere-corriferrara_26.html')">Numero tessera</div>
   </div>
 
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/pre-iscrizioni-prossime-gare-e-eventi.html')">
-    <div class="icon">07</div>
-    <div>Pre-iscrizioni gare</div>
-  </div>
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/pre-iscrizioni-prossime-gare-e-eventi.html')"><div class="icon">07</div>Pre-iscrizioni gare</div>
 
-  <div class="box" onclick="toggleSub('sub8')">
-    <div class="icon">08</div>
-    <div>Certificato medico</div>
-  </div>
+  <div class="box" onclick="toggleSub('sub8')"><div class="icon">08</div>Certificato medico</div>
   <div id="sub8" class="submenu">
     <div class="subbox" onclick="openLink('https://docs.google.com/forms/d/e/1FAIpQLSc-IrRlvTx6xbkoPPT8SdDc3X3yOwDIwdlF0gLZ-PVzS9NVPg/viewform')">Carica certificato</div>
     <div class="subbox" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/controlla-la-scadenza-del-tuo.html')">Controlla scadenza</div>
   </div>
 
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/allenamenti-collettivi.html')">
-    <div class="icon">09</div>
-    <div>Allenamenti collettivi</div>
-  </div>
-
-  <div class="box" onclick="openLink('https://www.runnerschoolitalia.com')">
-    <div class="icon">10</div>
-    <div>Runner’s School Italia</div>
-  </div>
-
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/trail-running.html')">
-    <div class="icon">11</div>
-    <div>Trail Section</div>
-  </div>
-
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/fc-bike-team.html')">
-    <div class="icon">12</div>
-    <div>Bike Team</div>
-  </div>
-
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/abbigliamento-corriferrara_18.html')">
-    <div class="icon">13</div>
-    <div>Abbigliamento ufficiale</div>
-  </div>
-
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/contatti.html')">
-    <div class="icon">14</div>
-    <div>Contatti</div>
-  </div>
-
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/sponsor.html')">
-    <div class="icon">15</div>
-    <div>Sponsor & Convenzioni</div>
-  </div>
-
-  <div class="box" onclick="openBiblioteca()">
-    <div class="icon">16</div>
-    <div>Biblioteca Corriferrara<br><span class="label-small">Libri e prestiti</span></div>
-  </div>
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/allenamenti-collettivi.html')"><div class="icon">09</div>Allenamenti collettivi</div>
+  <div class="box" onclick="openLink('https://www.runnerschoolitalia.com')"><div class="icon">10</div>Runner’s School Italia</div>
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/trail-running.html')"><div class="icon">11</div>Trail Section</div>
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/fc-bike-team.html')"><div class="icon">12</div>Bike Team</div>
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/abbigliamento-corriferrara_18.html')"><div class="icon">13</div>Abbigliamento ufficiale</div>
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/contatti.html')"><div class="icon">14</div>Contatti</div>
+  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/sponsor.html')"><div class="icon">15</div>Sponsor & Convenzioni</div>
+  <div class="box" onclick="openBiblioteca()"><div class="icon">16</div>Biblioteca</div>
 
 </div>
 
-<!-- NEWS LIVE -->
+<!-- NEWS -->
 <div class="news-section">
   <h2>📰 Ultime notizie Corriferrara</h2>
   <div id="news-list">Caricamento…</div>
 </div>
 
+<!-- NEWS JSONP -->
 <script>
 function caricaNews(data) {
   const box = document.getElementById("news-list");
   box.innerHTML = "";
-
-  if (!data.feed || !data.feed.entry) {
-    box.innerHTML = "<p>Nessun articolo disponibile.</p>";
-    return;
-  }
 
   data.feed.entry.forEach(e => {
     const title = e.title.$t;
     const link = e.link.find(l => l.rel === "alternate").href;
     const date = new Date(e.published.$t).toLocaleDateString("it-IT");
 
-    let img = "https://via.placeholder.com/800x400?text=Corriferrara";
-    if (e.media$thumbnail) {
-      img = e.media$thumbnail.url.replace("s72-c", "s800");
-    }
+    let img = "https://via.placeholder.com/300x200?text=Corriferrara";
+    if (e.media$thumbnail) img = e.media$thumbnail.url.replace("s72-c","s300");
 
     box.innerHTML += `
       <div class="news-card" onclick="openLink('${link}')">
-        <img src="${img}" alt="${title}">
+        <img src="${img}">
         <div class="news-content">
           <div class="news-title">${title}</div>
           <div class="news-date">${date}</div>
         </div>
-      </div>
-    `;
+      </div>`;
   });
 }
 </script>
