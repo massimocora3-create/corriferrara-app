@@ -11,15 +11,7 @@
 
 <style>
 * { box-sizing: border-box; }
-<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.getRegistrations().then(function(registrations) {
-    for (let registration of registrations) {
-      registration.unregister();
-    }
-  });
-}
-</script>
+
 body {
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -80,12 +72,6 @@ body {
 .icon {
   font-size: 22px;
   font-weight: 700;
-}
-
-.label-small {
-  font-size: 14px;
-  opacity: 0.85;
-  font-weight: 400;
 }
 
 /* SUBMENU */
@@ -153,14 +139,17 @@ body {
 function openLink(url) {
   window.open(url, "_blank");
 }
+
 function toggleMenu() {
   const g = document.getElementById("menuGrid");
   g.style.display = g.style.display === "grid" ? "none" : "grid";
 }
+
 function toggleSub(id) {
   const el = document.getElementById(id);
   el.style.display = el.style.display === "block" ? "none" : "block";
 }
+
 function openBiblioteca() {
   openLink("https://atleticacorriferrara.blogspot.com/p/biblioteca-corriferrara.html");
 }
@@ -172,10 +161,8 @@ function openBiblioteca() {
 
 <div class="header">Corriferrara – APP</div>
 
-<!-- MENU BUTTON -->
 <div class="menu-btn" onclick="toggleMenu()">☰ MENU CORRIFERRARA</div>
 
-<!-- MENU GRID -->
 <div id="menuGrid" class="grid">
 
   <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/storia-della-corriferrara-asd.html')"><div class="icon">01</div>Chi siamo</div>
@@ -190,32 +177,19 @@ function openBiblioteca() {
     <div class="subbox" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/tessere-corriferrara_26.html')">Numero tessera</div>
   </div>
 
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/pre-iscrizioni-prossime-gare-e-eventi.html')"><div class="icon">07</div>Pre-iscrizioni gare</div>
-
   <div class="box" onclick="toggleSub('sub8')"><div class="icon">08</div>Certificato medico</div>
   <div id="sub8" class="submenu">
     <div class="subbox" onclick="openLink('https://docs.google.com/forms/d/e/1FAIpQLSc-IrRlvTx6xbkoPPT8SdDc3X3yOwDIwdlF0gLZ-PVzS9NVPg/viewform')">Carica certificato</div>
     <div class="subbox" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/controlla-la-scadenza-del-tuo.html')">Controlla scadenza</div>
   </div>
 
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/allenamenti-collettivi.html')"><div class="icon">09</div>Allenamenti collettivi</div>
-  <div class="box" onclick="openLink('https://www.runnerschoolitalia.com')"><div class="icon">10</div>Runner’s School Italia</div>
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/trail-running.html')"><div class="icon">11</div>Trail Section</div>
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/fc-bike-team.html')"><div class="icon">12</div>Bike Team</div>
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/abbigliamento-corriferrara_18.html')"><div class="icon">13</div>Abbigliamento ufficiale</div>
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/contatti.html')"><div class="icon">14</div>Contatti</div>
-  <div class="box" onclick="openLink('https://atleticacorriferrara.blogspot.com/p/sponsor.html')"><div class="icon">15</div>Sponsor & Convenzioni</div>
-  <div class="box" onclick="openBiblioteca()"><div class="icon">16</div>Biblioteca</div>
-
 </div>
 
-<!-- NEWS -->
 <div class="news-section">
   <h2>📰 Ultime notizie Corriferrara</h2>
   <div id="news-list">Caricamento…</div>
 </div>
 
-<!-- NEWS JSONP -->
 <script>
 function caricaNews(data) {
   const box = document.getElementById("news-list");
@@ -240,8 +214,17 @@ function caricaNews(data) {
   });
 }
 </script>
+
 <script src="https://atleticacorriferrara.blogspot.com/feeds/posts/default?alt=json-in-script&max-results=10&callback=caricaNews"></script>
 
+<!-- PULIZIA SERVICE WORKER (TEMPORANEA) -->
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations().then(registrations => {
+    registrations.forEach(reg => reg.unregister());
+  });
+}
+</script>
 
 </body>
 </html>
